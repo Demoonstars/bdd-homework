@@ -3,7 +3,6 @@ package ru.netology.bdd.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-import ru.netology.bdd.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -16,12 +15,12 @@ public class TransferPage {
         amountInput.shouldBe(Condition.visible);
     }
 
-    public DashboardPage makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
+    public DashboardPage makeTransfer(String amountToTransfer, String cardNumber) {
         amountInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
         amountInput.setValue(amountToTransfer);
 
         fromInput.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
-        fromInput.setValue(cardInfo.getCardNumber());
+        fromInput.setValue(cardNumber);
 
         transferButton.click();
         return new DashboardPage();

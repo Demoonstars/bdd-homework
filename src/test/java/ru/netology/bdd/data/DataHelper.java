@@ -28,14 +28,18 @@ public class DataHelper {
 
     @Value
     public static class CardInfo {
-        String cardNumber;
-    }
+        private String cardNumber;
 
-    public static CardInfo getFirstCardInfo() {
-        return new CardInfo("5559 0000 0000 0001");
-    }
+        public CardInfo(String cardNumber) {
+            this.cardNumber = cardNumber;
+        }
 
-    public static CardInfo getSecondCardInfo() {
-        return new CardInfo("5559 0000 0000 0002");
+        public String getCardNumber() {
+            return cardNumber;
+        }
+
+        public String getMaskedNumber() {
+            return "**** **** **** " + cardNumber.substring(15);
+        }
     }
 }

@@ -56,15 +56,13 @@ public class TransferSteps {
 
     @Когда("пользователь переводит {int} рублей с карты с номером {string} на свою {int} карту с главной страницы")
     public void transfer(int amount, String cardNumber, int cardIndex) {
-        DataHelper.CardInfo targetCard = DataHelper.getFirstCardInfo();
-        transferPage = dashboardPage.selectCardToTransfer(targetCard);
-        dashboardPage = transferPage.makeTransfer(String.valueOf(amount), new DataHelper.CardInfo(cardNumber));
+        transferPage = dashboardPage.selectCardToTransfer(cardIndex - 1);
+        dashboardPage = transferPage.makeTransfer(String.valueOf(amount), cardNumber);
     }
 
     @Тогда("баланс его {int} карты из списка на главной странице должен стать {int} рублей")
     public void verifyBalance(int cardIndex, int expectedBalance) {
-        DataHelper.CardInfo targetCard = DataHelper.getFirstCardInfo();
-        int actualBalance = dashboardPage.getCardBalance(targetCard);
+        int actualBalance = dashboardPage.getCardBalance(cardIndex - 1);
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 }

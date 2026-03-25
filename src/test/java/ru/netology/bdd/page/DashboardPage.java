@@ -2,7 +2,6 @@ package ru.netology.bdd.page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.bdd.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,14 +18,18 @@ public class DashboardPage {
         heading.shouldBe(visible);
     }
 
-    public int getCardBalance(DataHelper.CardInfo cardInfo) {
-        // Ищем карту по последним 4 цифрам номера
-        var text = cards.findBy(text(cardInfo.getCardNumber().substring(15))).getText();
+    public int getCardBalance(int index) {
+        var text = cards.get(index).getText();
         return extractBalance(text);
     }
 
-    public TransferPage selectCardToTransfer(DataHelper.CardInfo cardInfo) {
-        cards.findBy(text(cardInfo.getCardNumber().substring(15))).$("button").click();
+    public int getCardBalanceByMaskedNumber(String maskedNumber) {
+        var text = cards.findBy(text(maskedNumber)).getText();
+        return extractBalance(text);
+    }
+
+    public TransferPage selectCardToTransfer(int index) {
+        cards.get(index).$("button").click();
         return new TransferPage();
     }
 
