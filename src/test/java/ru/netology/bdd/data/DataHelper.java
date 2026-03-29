@@ -14,7 +14,7 @@ public class DataHelper {
     }
 
     public static AuthInfo getAuthInfo() {
-        return new AuthInfo("vasya", "password");
+        return new AuthInfo("vasya", "qwerty123");
     }
 
     @Value
@@ -28,18 +28,18 @@ public class DataHelper {
 
     @Value
     public static class CardInfo {
-        private String cardNumber;
+        String cardNumber;
+    }
 
-        public CardInfo(String cardNumber) {
-            this.cardNumber = cardNumber;
-        }
+    public static CardInfo getFirstCardInfo() {
+        return new CardInfo("5559 0000 0000 0001");
+    }
 
-        public String getCardNumber() {
-            return cardNumber;
-        }
+    public static CardInfo getSecondCardInfo() {
+        return new CardInfo("5559 0000 0000 0002");
+    }
 
-        public String getMaskedNumber() {
-            return "**** **** **** " + cardNumber.substring(15);
-        }
+    public static String getMaskedNumber(String cardNumber) {
+        return "**** **** **** " + cardNumber.substring(15);
     }
 }
